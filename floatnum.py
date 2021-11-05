@@ -6,10 +6,8 @@ class FloatingPointEncode(object):
     def __init__(self) -> None:
         # TODO randomize format
         # calc bias
-        # self.numerator = self.number_getter()
-        self.numerator = -40
-        # self.denominator = abs(self.number_getter())
-        self.denominator = 94
+        self.numerator = self.number_getter()
+        self.denominator = abs(self.number_getter())
         self.bias = 7 # constant for now
         self.printfraction = fractions.Fraction(self.numerator, self.denominator)
         self.mine = 1 - self.bias
@@ -149,7 +147,7 @@ class FloatingPointDecode(object):
 
     def create_bit_string(self) -> str:
         ''' Creates randomized bit string of length {max} '''
-        max = 3 # change this for shorter bit strings
+        max = 5 # change this for shorter bit strings
         return_str = ""
         for _ in range(random.randint(2,max)):
             return_str += str(random.randint(0,1))

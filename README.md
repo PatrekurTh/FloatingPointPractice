@@ -6,5 +6,7 @@ Gert fyrir lokapróf í Tölvuhögun
 
 # Known Bugs
 Infinite loop in encoding
+
 Input isn't checked
+
 Division by 0

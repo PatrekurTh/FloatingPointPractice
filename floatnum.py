@@ -3,9 +3,10 @@ import fractions
 from text_colors import bcolors
 
 class FloatingPointEncode(object):
-    def __init__(self) -> None:
+    def __init__(self, difficulty) -> None:
         # TODO randomize format
         # calc bias
+        self.difficulty = difficulty
         self.numerator = self.number_getter()
         self.denominator = abs(self.number_getter())
         self.bias = 7 # constant for now
@@ -14,8 +15,9 @@ class FloatingPointEncode(object):
         self.maxe = 14 - self.bias
         self.case = "Normalized"
         self.sign = self.calc_sign()
-        self.frac , self.expo = self.biased_exponent()
+        self.frac, self.expo = self.biased_exponent()
         self.case_l = "N"
+        
 
     def biased_exponent(self):
         mantissa, exponent = self.normalise()
@@ -98,7 +100,7 @@ class FloatingPointEncode(object):
         return ret
 
     def number_getter(self):
-        return random.randint(-50, 100)
+        return random.randint(-self.difficulty, self.difficulty)
 
     def review_ans(self, sign, exponent, fraction, case):
         print("="*50)
@@ -138,16 +140,18 @@ class FloatingPointEncode(object):
 
 
 class FloatingPointDecode(object):
-    def __init__(self) -> None:
+    def __init__(self, difficulty=3) -> None:
+        self.difficulty = difficulty
         self.mantissa = self.create_bit_string()
         self.exponent = self.create_bit_string()
         self.sign = str(random.randint(0,1))
         self.bias = 2**(len(self.exponent)-1)-1
         self.case = self.calc_case()
+        
 
     def create_bit_string(self) -> str:
         ''' Creates randomized bit string of length {max} '''
-        max = 5 # change this for shorter bit strings
+        max = self.difficulty # 3 - 7
         return_str = ""
         for _ in range(random.randint(2,max)):
             return_str += str(random.randint(0,1))

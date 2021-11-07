@@ -57,18 +57,19 @@ def main():
 
     quit = False
     de_en = input("Do you want to practice encoding or decoding? (e/d) ")
+    diff = int(input("Enter difficulty (1-5): "))
 
     while not quit:
         os.system('cls')
         if de_en == "d":
-            fp = FloatingPointDecode()
+            fp = FloatingPointDecode(diff+2)
             print_header_decode()
             cowsay(fp)
             print()
             bias, sign, mantissa, exponent, decoded = get_decode_input()
             fp.review_ans(bias, sign, mantissa, exponent, decoded)
         else:
-            fp1 = FloatingPointEncode()
+            fp1 = FloatingPointEncode(diff*20)
             print_header_encode()
             cowsay(fp1)
             print()

@@ -5,7 +5,7 @@ Gert fyrir lokapróf í Tölvuhögun
 
 
 # Known Bugs
-Infinite loop in encoding
+Infinite loop in encoding (sometimes)
 
 Input isn't checked
 

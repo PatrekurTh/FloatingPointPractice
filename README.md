@@ -2,6 +2,7 @@
 Gert fyrir lokapróf í Tölvuhögun
 
 Run the main.py file
+
 I recommend having the terminal window rather large
 
 # Known Features

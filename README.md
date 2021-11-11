@@ -1,7 +1,7 @@
 # FloatingPointPractice
 Gert fyrir lokapróf í Tölvuhögun
 
-#1 Run the main.py file
+Run the main.py file
 
 
 # Known Bugs

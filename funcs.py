@@ -31,10 +31,10 @@ def get_decode_input():
     b = int(input("bias = "))
     s = input("S = ")
     m = input("M (fraction form) = ")
-    if m:
+    if m != 'n/a':
         m = fractions.Fraction(m)
     e = input("E = ")
-    if e:
+    if e != 'n/a':
         e = int(e)
     y = (input("Y (fraction form) = "))
     try:

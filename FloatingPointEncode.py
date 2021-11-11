@@ -5,8 +5,8 @@ class FloatingPointEncode(object):
     def __init__(self, difficulty) -> None:
         # TODO randomize format
         self.difficulty = difficulty
-        numerator = self.get_number()
-        denominator = self.get_number()
+        self.numerator = self.get_number()
+        self.denominator = self.get_number()
         self.case = 'N'
         if self.denominator:
             self.fraction = fractions.Fraction(self.numerator, self.denominator)

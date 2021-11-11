@@ -23,7 +23,7 @@ class FloatingPointDecode(object):
         if not "0" in self.exponent:
             # mantissa is all 0's
             if not "1" in self.mantissa:
-                return "infinity"
+                return "Infinity"
             else:
                 # mantissa is all 1's
                 return "NaN"
@@ -45,10 +45,11 @@ class FloatingPointDecode(object):
 
     def expo_ans(self):
         ''' Calculate exponent of float '''
-        exponent_ans = int(self.exponent, 2) - self.get_bias()
         if self.case == "Normalized" or self.case == "Denormalized":
+            exponent_ans = int(self.exponent, 2) - self.get_bias()
             return exponent_ans
-        else : return ""
+        else: # Infinity or NaN
+            return "n/a"
 
     def frac_ans(self):
         ''' Calculate mantissa of float '''
@@ -61,8 +62,8 @@ class FloatingPointDecode(object):
             frac_ans = 1 + the_sum
         elif self.case == "Denormalized":
             frac_ans = the_sum
-        else:
-            return ""
+        else: # Infinity or NaN
+            return "n/a"
         return fractions.Fraction(frac_ans)
 
     def calc_ans(self):
@@ -83,7 +84,7 @@ class FloatingPointDecode(object):
     def calc_sign(self):
         ''' Checks if sign matters '''
         if self.case == "NaN":
-            return ""
+            return "n/a"
         return self.sign
 
     def __str__(self):

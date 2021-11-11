@@ -3,7 +3,8 @@ from text_colors import bcolors
 
 def print_header_decode():
     print(f"="*50)
-    print(f"{bcolors.INFO}If the value is not a number or infinite please use\nNaN and (+/-) Infinity for Y and leave M and E empty\nLeave sign bit empty if NaN{bcolors.ENDC}")
+    print(f"{bcolors.INFO}If the value is not a number or infinite please use NaN and ±Infinity{bcolors.ENDC}")
+    print(f"{bcolors.INFO}Please enter 'n/a' where it applies (NaN, Infinity etc.){bcolors.ENDC}")
     print("="*50)
     print(f"{bcolors.INFO}The formula is Y = (-1)^S x M x 2^E{bcolors.ENDC}")
     print(f"{bcolors.INFO}Decode the following floating point values values:{bcolors.ENDC}")
@@ -12,6 +13,7 @@ def print_header_decode():
 
 def print_header_encode():
     print("="*50)
+    print(f"{bcolors.WARNING}* Format randomizer will be implemented soon *{bcolors.ENDC}")
     print(f"{bcolors.INFO}Format, 4 exponent bits and 5 fraction bits. [ S ][ e e e e ][ f f f f f ]{bcolors.ENDC}")
     print(f"{bcolors.INFO}min(E) is -6, bias is 7{bcolors.ENDC}")
     print(f"{bcolors.INFO}Please enter 'n/a' for sign if it has no meaning{bcolors.ENDC}")
@@ -80,3 +82,15 @@ def review_encode_answer(fp_obj, sign, exponent, fraction, case):
     print_result("exp", fp_obj.get_exponent(), exponent)
     print_result("frac", fp_obj.get_fraction(), fraction)
     print_result("case", fp_obj.case, case)
+
+def print_welcome():
+    print(f"""
+================================================================================================
+                        __        __   _                          
+                        \ \      / /__| | ___ ___  _ __ ___   ___ 
+                         \ \ /\ / / _ \ |/ __/ _ \| '_ ` _ \ / _ \\
+                          \ V  V /  __/ | (_| (_) | | | | | |  __/ 
+                           \_/\_/ \___|_|\___\___/|_| |_| |_|\___|
+              To the floating point encoding/decoding practice simulator-inator
+================================================================================================
+                                                                                {bcolors.NAME}made by Patrekur{bcolors.ENDC}""")

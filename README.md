@@ -4,6 +4,6 @@ Gert fyrir lokapróf í Tölvuhögun
 Run the main.py file
 
 
-# Known Bugs
+# Known Features
 
 Input isn't checked

@@ -18,7 +18,7 @@ class FloatingPointEncode(object):
             mantissa_list = self.normalise()[0]
             return ''.join(mantissa_list)[:5] # constant hér er len(f)
         else:
-            return '!0'
+            return '!0x0'
 
     def get_exponent(self):
         try:
@@ -51,7 +51,6 @@ class FloatingPointEncode(object):
         whole_part = list(self.whole_to_bin(int(self.fraction)))
         fraction_part = list(self.frac_to_bin())
         binary_num = whole_part + ['.'] + fraction_part
-        print(f"{binary_num=}")
         dot_hop_counter = 0
         try:
             leftmost_one = binary_num.index('1')

@@ -7,7 +7,7 @@ I recommend having the terminal window rather large
 
 # Known Features
 
-Input isn't checked
+Input isn't checked so be careful what you type
 
 # How it looks
 

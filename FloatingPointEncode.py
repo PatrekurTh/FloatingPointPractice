@@ -3,11 +3,12 @@ import fractions
 
 class FloatingPointEncode(object):
     def __init__(self, difficulty) -> None:
-        # TODO randomize format
         self.difficulty = difficulty
-        self.numerator = self.get_number()
+        self.numerator = self.get_numerator()
         self.denominator = self.get_denominator()
         self.case = 'N'
+        self.exponent_size = self.get_number()
+        self.mantissa_size = self.get_number()
         if self.denominator:
             self.fraction = fractions.Fraction(self.numerator, self.denominator)
         else:
@@ -16,7 +17,7 @@ class FloatingPointEncode(object):
     def get_fraction(self):
         if self.case != 'S':
             mantissa_list = self.normalise()[0]
-            return ''.join(mantissa_list)[:5] # constant hér er len(f)
+            return ''.join(mantissa_list)[:self.mantissa_size]
         else:
             return '!0x0'
 
@@ -24,11 +25,11 @@ class FloatingPointEncode(object):
         try:
             fraction = self.whole_to_bin(self.normalise()[1] + self.get_bias())
         except TypeError: # case 'S'
-            return "".join(['1' for _ in range(4)])
+            return "".join(['1' for _ in range(self.exponent_size)])
         if self.case == 'N':
-            return fraction[-4:] # # constant hér er len(e)
+            return fraction[-self.exponent_size:]
         else: # case 'D'
-            return "".join(['0' for _ in range(4)])
+            return "".join(['0' for _ in range(self.exponent_size)])
 
     def get_sign(self):
         if self.case != 'S':
@@ -36,13 +37,25 @@ class FloatingPointEncode(object):
         else : return 'n/a'
 
     def get_bias(self):
-        return 7 # constant for now
+        return 2 ** (self.exponent_size -1) -1
 
     def get_min_e(self):
         return 1 - self.get_bias()
 
     def get_max_e(self):
-        return 14 - self.get_bias()
+        x = "".join(['1' if i != self.exponent_size else '0' for i in range(1, self.exponent_size+1)])
+        return int(x, 2) - self.get_bias()
+    
+    def get_numerator(self):
+        return random.randint(-self.difficulty, self.difficulty)
+
+    def get_denominator(self):
+        x = random.randint(-self.difficulty, self.difficulty)
+        y = random.choice([2**x for x in range(int((self.difficulty/20)*2))])
+        return random.choice([x,y])
+    
+    def get_number(self):
+        return random.randint(2,(self.difficulty/20)+2)
 
     def normalise(self):
         if self.denominator == 0:
@@ -100,14 +113,6 @@ class FloatingPointEncode(object):
             bit_str += str(int(num * 2))
             num = (num * 2) - int(num * 2)
         return bit_str
-
-    def get_number(self):
-        return random.randint(-self.difficulty, self.difficulty)
-
-    def get_denominator(self):
-        x = random.randint(-self.difficulty, self.difficulty)
-        y = random.choice([2**x for x in range(int((self.difficulty/20)*2))])
-        return random.choice([x,y])
 
     def __str__(self) -> str:
         if self.case == 'S':

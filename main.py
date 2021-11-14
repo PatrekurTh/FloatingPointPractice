@@ -29,11 +29,11 @@ def game(de_en, diff):
             review_decode_answer(fp, bias, sign, mantissa, exponent, decoded)
         else:
             fp = FloatingPointEncode(diff*20)
-            print_header_encode()
+            print_header_encode(fp.exponent_size, fp.mantissa_size)
             cowsay(fp)
             print()
-            sign, exponent, fraction, case = get_encode_input()
-            review_encode_answer(fp, sign, exponent, fraction, case)
+            sign, exponent, fraction, case, bias, min_e = get_encode_input()
+            review_encode_answer(fp, sign, exponent, fraction, case, bias, min_e)
 
         decisions = input("Another one? (no to quit, m for menu) ").lower()
         if  decisions == "no":

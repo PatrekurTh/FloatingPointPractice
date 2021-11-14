@@ -6,17 +6,19 @@ from text_colors import bcolors
 
 def main():
     os.system('cls')
-
-    quit = False
     print_welcome()
-
+    
     de_en = input("Do you want to practice encoding or decoding (e/d)? ")
     print(f"{bcolors.INFO}Higher difficulty only increases the {bcolors.ENDC}", end="")
     print(f"{bcolors.WARNING}POTENTIAL {bcolors.ENDC}", end="")
     print(f"{bcolors.INFO}difficulty of cases{bcolors.ENDC}")
     print(f"{bcolors.INFO}It does not automatically mean harder cases{bcolors.ENDC}")
     diff = int(input("Enter difficulty (1-5): "))
+    game(de_en, diff)
 
+def game(de_en, diff):
+
+    quit = False
     while not quit:
         os.system('cls')
         if de_en == "d":
@@ -33,7 +35,10 @@ def main():
             sign, exponent, fraction, case = get_encode_input()
             review_encode_answer(fp, sign, exponent, fraction, case)
 
-        if input("Another one? (enter no to quit) ").lower() == "no":
+        decisions = input("Another one? (no to quit, m for menu) ").lower()
+        if  decisions == "no":
             quit = True
+        elif decisions == "m":
+            main()
 
 main()

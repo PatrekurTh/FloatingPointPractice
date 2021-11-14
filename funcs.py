@@ -1,4 +1,5 @@
 import fractions
+from math import exp
 from text_colors import bcolors
 
 def print_header_decode():
@@ -11,30 +12,31 @@ def print_header_decode():
     print("="*50)
     print()
 
-def print_header_encode():
+def print_header_encode(exponent_size, mantissa_size):
+    print(f"{exponent_size=}")
     print("="*50)
-    print(f"{bcolors.WARNING}* Format randomizer will be implemented soon *{bcolors.ENDC}")
-    print(f"{bcolors.INFO}Format, 4 exponent bits and 5 fraction bits. [ S ][ e e e e ][ f f f f f ]{bcolors.ENDC}")
-    print(f"{bcolors.INFO}min(E) is -6, bias is 7{bcolors.ENDC}")
+    print(f"{bcolors.INFO}Format, {exponent_size} exponent bits and {mantissa_size} fraction bits. [ S ][ {' '.join(['e' for _ in range(exponent_size)])} ][ {' '.join(['f' for _ in range(mantissa_size)])} ]{bcolors.ENDC}")
     print(f"{bcolors.INFO}Please enter 'n/a' for sign if it has no meaning{bcolors.ENDC}")
     print(f"{bcolors.INFO}Solve the following encoding problem:{bcolors.ENDC}")
     print("="*50)
 
 def get_encode_input():
+    bias = int(input("What is the bias? "))
+    min_e = int(input("What is min(E)? "))
     sign = input("S = ")
     exponent = input("exp = ")
     fraction = input("frac = ")
     case = input("Is this  Norm, De-Norm or Special-Case  (N/D/S)? ")
-    return sign, exponent, fraction, case
+    return sign, exponent, fraction, case, bias, min_e
 
 def get_decode_input():
     b = int(input("bias = "))
     s = input("S = ")
     m = input("M (fraction form) = ")
-    if m != 'n/a':
+    if m:
         m = fractions.Fraction(m)
     e = input("E = ")
-    if e != 'n/a':
+    if e:
         e = int(e)
     y = (input("Y (fraction form) = "))
     try:
@@ -76,8 +78,10 @@ def review_decode_answer(fp_obj, bias, sign, mantissa, exponent, decoded):
     print_result("Exponent", fp_obj.expo_ans(), exponent)
     print_result("Y", fp_obj.calc_ans(), decoded)
 
-def review_encode_answer(fp_obj, sign, exponent, fraction, case):
+def review_encode_answer(fp_obj, sign, exponent, fraction, case, bias, min_e):
     print_answer_head()
+    print_result("Bias", fp_obj.get_bias(), bias)
+    print_result("min(E)", fp_obj.get_min_e(), min_e)
     print_result("Sign", fp_obj.get_sign(), sign) # done
     print_result("exp", fp_obj.get_exponent(), exponent)
     print_result("frac", fp_obj.get_fraction(), fraction)

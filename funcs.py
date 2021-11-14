@@ -13,7 +13,6 @@ def print_header_decode():
     print()
 
 def print_header_encode(exponent_size, mantissa_size):
-    print(f"{exponent_size=}")
     print("="*50)
     print(f"{bcolors.INFO}Format, {exponent_size} exponent bits and {mantissa_size} fraction bits. [ S ][ {' '.join(['e' for _ in range(exponent_size)])} ][ {' '.join(['f' for _ in range(mantissa_size)])} ]{bcolors.ENDC}")
     print(f"{bcolors.INFO}Please enter 'n/a' for sign if it has no meaning{bcolors.ENDC}")

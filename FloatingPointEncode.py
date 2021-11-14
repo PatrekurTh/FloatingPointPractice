@@ -6,7 +6,7 @@ class FloatingPointEncode(object):
         # TODO randomize format
         self.difficulty = difficulty
         self.numerator = self.get_number()
-        self.denominator = self.get_number()
+        self.denominator = self.get_denominator()
         self.case = 'N'
         if self.denominator:
             self.fraction = fractions.Fraction(self.numerator, self.denominator)
@@ -103,6 +103,11 @@ class FloatingPointEncode(object):
 
     def get_number(self):
         return random.randint(-self.difficulty, self.difficulty)
+
+    def get_denominator(self):
+        x = random.randint(-self.difficulty, self.difficulty)
+        y = random.choice([2**x for x in range(int((self.difficulty/20)*2))])
+        return random.choice([x,y])
 
     def __str__(self) -> str:
         if self.case == 'S':

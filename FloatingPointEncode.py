@@ -50,8 +50,10 @@ class FloatingPointEncode(object):
         return random.randint(-self.difficulty, self.difficulty)
 
     def get_denominator(self):
-        y = random.choice([2**x for x in range(int((self.difficulty/20)*2))])
-        return y
+        y = [2**x for x in range(int((self.difficulty/20)*2))]
+        y += [2**x for x in range(int((self.difficulty/20)*2)) if 2**x > 2]
+        y.append(0)
+        return random.choice(y)
     
     def get_number(self):
         return random.randint(2,(self.difficulty/20)+2)

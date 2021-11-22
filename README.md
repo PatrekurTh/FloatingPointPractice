@@ -9,6 +9,8 @@ I recommend having the terminal window rather large
 
 Input isn't checked so be careful what you type
 
+Error in decoding denormalized numbers
+
 # How it looks
 
 Welcome screen
